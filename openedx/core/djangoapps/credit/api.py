@@ -129,7 +129,8 @@ def get_credit_requirement(course_key, namespace, name):
 
 
 def set_credit_requirement_status(user_name, requirement, status="satisfied"):
-    """Update Credit Requirement Status for given username and requirement if exists else add new
+    """Update Credit Requirement Status for given username and requirement
+        if exists else add new
 
     Args:
         user_name(str): username of the user

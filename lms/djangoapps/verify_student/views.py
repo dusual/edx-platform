@@ -1019,7 +1019,8 @@ def results_callback(request):
                         attempt.user.username, credit_requirement, "satisfied"
                     )
                 except Exception:  # pylint: disable=broad-except
-                    # Catch exception if unable to add credit requirement status for user
+                    # Catch exception if unable to add credit requirement
+                    # status for user
                     log.warn("Unable to add Credit requirement status for %s", attempt.user.username)
 
     elif result == "FAIL":

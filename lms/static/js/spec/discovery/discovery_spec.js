@@ -295,7 +295,7 @@ define([
         });
 
     });
-    
+
     describe('FilterBarView', function () {
         beforeEach(function () {
             loadFixtures('js/fixtures/discovery.html');
@@ -589,6 +589,7 @@ define([
         });
 
     });
+
 
 
 });

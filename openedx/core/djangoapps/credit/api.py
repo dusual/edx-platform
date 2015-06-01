@@ -1,7 +1,7 @@
 """ Contains the APIs for course credit requirements """
 
 from .exceptions import InvalidCreditRequirements
-from .models import CreditCourse, CreditRequirement
+from .models import CreditCourse, CreditRequirement, CreditRequirementStatus
 from openedx.core.djangoapps.credit.exceptions import InvalidCreditCourse
 
 
@@ -112,6 +112,32 @@ def get_credit_requirements(course_key, namespace=None):
         }
         for requirement in requirements
     ]
+
+
+def get_credit_requirement(course_key, namespace, name):
+    """ Returns the requirement of a given course, namespace and name
+
+    Args:
+        course_key(CourseKey): The identifier for course
+        namespace(str): Namespace of requirement
+        name: Name of the requirement
+
+    Returns:
+        Credit Requirement object
+    """
+    return CreditRequirement.get_course_requirement(course_key, namespace, name)
+
+
+def set_credit_requirement_status(user_name, requirement, status="satisfied"):
+    """Update Credit Requirement Status for given username and requirement if exists else add new
+
+    Args:
+        user_name(str): username of the user
+        requirement(CreditRequirement): CreditRequirement object
+        status(str): status of the requirement
+    """
+    CreditRequirementStatus.add_or_update_requirement_status(user_name, requirement, status)
+
 
 
 def _get_requirements_to_disable(old_requirements, new_requirements):

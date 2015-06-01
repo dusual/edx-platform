@@ -135,7 +135,7 @@ class CreditRequirement(TimeStampedModel):
 
     @classmethod
     def get_course_requirement(cls, course_key, namespace, name):
-        """ Get credit requirements of a given course
+        """ Get credit requirement of a given course
 
         Args:
             course_key(CourseKey): The identifier for a course
@@ -146,12 +146,10 @@ class CreditRequirement(TimeStampedModel):
             CreditRequirement object if exists
         """
         try:
-            requirement = CreditRequirement.objects.get(
+            return cls.objects.get(
                 course__course_key=course_key, active=True, namespace=namespace, name=name
             )
-
-            return requirement
-        except CreditRequirement.DoesNotExist:
+        except cls.DoesNotExist:
             return None
 
 
@@ -167,7 +165,7 @@ class CreditRequirementStatus(TimeStampedModel):
     status = models.CharField(choices=REQUIREMENT_STATUS_CHOICES, max_length=32)
 
     @classmethod
-    def add_requirement_status(cls, user_name, requirement, status="satisfied"):
+    def add_or_update_requirement_status(cls, user_name, requirement, status="satisfied"):
         """ Add credit requirement status for given username
 
         Args:
@@ -175,7 +173,14 @@ class CreditRequirementStatus(TimeStampedModel):
             requirement(CreditRequirement): CreditRequirement object
             status(str): status of the requirement
         """
-        cls.objects.create(username=user_name, requirement=requirement, status=status)
+        requirement_status, created = cls.objects.get_or_create(
+            username=user_name,
+            requirement=requirement
+        )
+        if not created:
+            requirement_status.status = status
+            requirement_status.save()
+        return requirement_status
 
 
 class CreditEligibility(TimeStampedModel):

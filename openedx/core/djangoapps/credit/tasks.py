@@ -82,12 +82,8 @@ def _get_min_grade_requirement(course):
                 }
             }
         ]
-    except AttributeError as exp:
-        LOGGER.error(
-            "The course {course_id} does not has minimum_grade_credit attribute".format(
-                course_id=unicode(course.id)
-            )
-        )
+    except AttributeError:
+        LOGGER.error("The course %s does not has minimum_grade_credit attribute", unicode(course.id))
     return requirement
 
 
@@ -137,15 +133,9 @@ def _is_credit_requirement(xblock):
             if not callable(getattr(xblock, "get_credit_requirement_namespace", None)):
                 is_credit_requirement = False
                 LOGGER.error(
-                    "The has_namespace_function is not defined on xblock {xblock}".format(
-                        xblock=xblock
-                    )
+                    "The has_namespace_function is not defined on xblock %s", xblock
                 )
             if not callable(getattr(xblock, "get_credit_requirement_name", None)):
                 is_credit_requirement = False
-                LOGGER.error(
-                    "The has_name_function is not defined on xblock {xblock}".format(
-                        xblock=xblock
-                    )
-                )
+                LOGGER.error("The has_name_function is not defined on xblock %s", xblock)
     return is_credit_requirement

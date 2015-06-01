@@ -37,10 +37,6 @@ class TestTaskExecution(ModuleStoreTestCase):
             category='edx-reverification-block',
             display_name='Test Verification Block'
         )
-        self.section_location = section.location
-        self.subsection_location = subsection.location
-        self.vertical_location = vertical.location
-        self.reverification_location = reverification.location
 
     def setUp(self):
         super(TestTaskExecution, self).setUp()

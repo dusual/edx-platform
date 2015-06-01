@@ -116,13 +116,6 @@
     }
 
     .message-actions .action {
-        display: inline-block;
-        vertical-align: middle;
-        margin-right: spacing-horizontal(small);
-
-        &:last-child {
-            margin-right: 0;
-        }
 
         .icon {
             margin-right: spacing-horizontal(x-small);

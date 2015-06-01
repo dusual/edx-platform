@@ -142,7 +142,8 @@ def set_credit_requirement_status(user_name, requirement, status="satisfied"):
 
 
 def _get_requirements_to_disable(old_requirements, new_requirements):
-    """ Returns the ids of CreditRequirement to be disabled that are deleted from the courseware
+    """ Returns the ids of CreditRequirement to be disabled that are deleted
+        from the courseware
 
     Args:
         old_requirements(QuerySet): QuerySet of CreditRequirement

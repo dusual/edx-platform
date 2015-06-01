@@ -28,7 +28,6 @@ urlpatterns = (
 
     url(r'^admin_dashboard$', 'dashboard.views.dashboard'),
 
-    url(r'^change_email$', 'student.views.change_email_request', name="change_email"),
     url(r'^email_confirm/(?P<key>[^/]*)$', 'student.views.confirm_email_change'),
     url(r'^change_name$', 'student.views.change_name_request', name="change_name"),
     url(r'^event$', 'track.views.user_track'),
